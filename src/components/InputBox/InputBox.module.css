@@ -1,0 +1,13 @@
+.inputBox {
+  border-radius: 2rem;
+  border: 2px solid black;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  height: 1.2rem;
+  text-align: center;
+}
+
+.label {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
