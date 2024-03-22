@@ -1,6 +1,7 @@
 .button {
   background-color: #f9f9f9;
   border-radius: 2rem;
+  border-color: white;
   width: 8rem;
   margin: 1rem;
   font-size: 1.2rem;
@@ -8,22 +9,32 @@
   text-align: center;
 }
 
-.button:hover,
-.smallButton:hover {
-  border: 1px solid black;
-  background-color: rgba(11, 242, 161, 0.793);
+.button:hover {
+  border: 1px solid white;
+  background-color: rgba(0, 200, 255, 0.77);
   color: white;
+  font-weight: bold;
 }
 
 .smallButton {
-  background-color: #f9f9f9;
   border-radius: 1.5rem;
   width: 6rem;
   height: 2rem;
   font-size: 1rem;
+  background-color: #f9f9f9;
+  border-color: white;
+  text-align: center;
+}
+
+.smallButton:hover {
+  border: 1px solid white;
+  background-color: rgba(3, 238, 66, 0.988);
+  color: white;
+  font-weight: bold;
 }
 
 .isSelected {
   color: white;
-  background-color: rgba(11, 188, 242, 0.793);
+  background-color: rgba(3, 238, 66, 0.988);
+  font-weight: bold;
 }

@@ -3,12 +3,15 @@ import { userContext } from "../../App";
 import Button from "../Button/Button";
 import InputBox from "../InputBox/InputBox";
 import styles from "../SignUp/SignUp.module.css";
+import styles1 from "./SignIn.module.css";
+import { MD5 } from "crypto-js";
 
 const SignIn = () => {
   const [userName, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState("");
-  const { usersData } = useContext(userContext);
+  const { usersData, setUserLoggedIn, setIsLogin, setLoggedInUser } =
+    useContext(userContext);
   const ValidateCredentials = () => {
     if (userName.length === 0 && password.length === 0) {
       setStatus("Please Enter userName and password");
@@ -23,8 +26,13 @@ const SignIn = () => {
     const isUserAvailable = usersData.find(
       (user) => user.userName === userName
     );
-    if (isUserAvailable && password === isUserAvailable.passWord) {
+    if (
+      isUserAvailable &&
+      MD5(password).toString() === isUserAvailable.passWord
+    ) {
       setStatus("User loggedIn successfully");
+      setLoggedInUser(isUserAvailable);
+      setUserLoggedIn(true);
       return;
     } else {
       setStatus("Please check Credentials!!");
@@ -43,12 +51,18 @@ const SignIn = () => {
         type="password"
         onchange={(e) => setPassword(e.target.value)}
       />
+      <p>
+        New User?? Please{" "}
+        <a href="localhost:3000" onClick={() => setIsLogin(false)}>
+          Sign Up
+        </a>
+      </p>
       <Button
         name={"Login"}
         size="small"
         onclick={() => ValidateCredentials()}
       ></Button>
-      <p>{status}</p>
+      <p className={styles1.errorMessage}>{status}</p>
     </div>
   );
 };

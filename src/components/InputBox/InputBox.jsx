@@ -8,6 +8,7 @@ const InputBox = (props) => {
         className={styles.inputBox}
         type={props.type}
         onChange={props.onchange}
+        placeholder={props.labelFor}
       />
     </>
   );

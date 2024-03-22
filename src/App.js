@@ -1,13 +1,16 @@
 import { createContext, useEffect, useState } from "react";
-import Button from "./components/Button/Button";
 import SignIn from "./components/SignIn/SignIn";
 import SignUp from "./components/SignUp/SignUp";
 import styles from "./App.module.css";
+import Application from "./components/Application/Application";
+import ButtonOptions from "./components/ButtonOptions/ButtonOptions";
 export const userContext = createContext();
 
 function App() {
-  const [IsLogIn, setIsLogin] = useState(false);
+  const [IsLogIn, setIsLogin] = useState(true);
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [usersData, setUsersData] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,20 +31,26 @@ function App() {
 
   return (
     <div className={styles.container}>
-      <div>
-        <Button
-          name={"Sign In"}
-          onclick={() => setIsLogin(true)}
-          active={IsLogIn}
-        ></Button>
-        <Button
-          name="Sign Up"
-          onclick={() => setIsLogin(false)}
-          active={!IsLogIn}
-        ></Button>
-      </div>
-      <userContext.Provider value={{ usersData, setUsersData }}>
-        {IsLogIn ? <SignIn /> : <SignUp setIsLogin={setIsLogin} />}
+      <userContext.Provider
+        value={{
+          usersData,
+          setUsersData,
+          userLoggedIn,
+          setUserLoggedIn,
+          setIsLogin,
+          IsLogIn,
+          loggedInUser,
+          setLoggedInUser,
+        }}
+      >
+        {userLoggedIn ? (
+          <Application loggedInUser={loggedInUser} />
+        ) : (
+          <>
+            <ButtonOptions />
+            {IsLogIn ? <SignIn /> : <SignUp setIsLogin={setIsLogin} />}
+          </>
+        )}
       </userContext.Provider>
     </div>
   );
